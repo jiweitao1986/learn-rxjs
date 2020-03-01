@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rxjs Simple</title>
+    <script src="../node_modules/rxjs/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+
+
+<script>
+  // var ob = rxjs.of(1, 2);
+  // ob.subscribe((value)=> {
+  //   console.log(value);
+  // })
+  
+  const observable1 = new rxjs.Observable(subscriber => {
+    subscriber.next(1);
+    subscriber.next(2);
+    subscriber.next(3);
+    setTimeout(() => {
+      subscriber.next(4);
+      subscriber.complete();
+    }, 1000);
+  });
+
+  const observable2 = new rxjs.Observable(subscriber => {
+    // subscriber.next(5);
+    // subscriber.next(6);
+    subscriber.next(7);
+    setTimeout(() => {
+      // subscriber.next(8);
+      subscriber.complete();
+    }, 1000);
+  });
+
+  var result$  = rxjs.forkJoin([observable1, observable2]);
+  result$.subscribe({
+    next: (result)=> {
+      console.log(result);
+    },
+    complete: ()=>{
+      console.log('completed');
+    }
+  });
+  
+</script>
+
+
+
+</body>
+</html>

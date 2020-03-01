@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple</title>
+    <script src="../../../node_modules/rxjs/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+
+<script>
+
+    (function() {
+
+        console.log('--------------------');
+
+        var observable = rxjs.empty();
+        observable.subscribe({
+            next    : (x)   => {
+              console.log('next ' + x)
+            },
+            error   : (err) => {
+              console.log('error: ' + err)
+            },
+            complete: ()  => {
+              console.log('complete')
+            },
+        });
+
+    })();
+
+</script>
+
+
+
+<script>
+
+  (function() {
+
+      console.log('--------------------');
+
+      var observable = rxjs.empty();
+      observable.subscribe({
+          next    : (x)   => {
+            console.log('next ' + x)
+          },
+          error   : (err) => {
+            console.log('error: ' + err)
+          },
+          complete: ()  => {
+            console.log('complete')
+          },
+      });
+
+  })();
+
+</script>
+
+
+
+</body>
+</html>

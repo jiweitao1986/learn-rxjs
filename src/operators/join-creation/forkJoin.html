@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>forkJOin</title>
+    <script src="../../../node_modules/rxjs/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+
+
+
+
+
+<script>
+  //--------------------------------------------------------------------------------
+  // forkJoin会等所有的流合并后，将它们最后一个值合并成一个数组，作为合并流的值发送，并立即技术
+  //--------------------------------------------------------------------------------
+  //
+  //OUTPUT:
+  //
+  // [1, 2]
+  //--------------------------------------------------------------------------------
+
+  (function() {
+    var timer1$ = rxjs.interval(2000).pipe(
+      rxjs.operators.take(2),
+      rxjs.operators.tap((value) => {
+        console.log(`timer1: ${value}`);
+      })
+    );
+    var timer2$ = rxjs.interval(1000).pipe(
+      rxjs.operators.take(3),
+      rxjs.operators.tap((value)=> {
+        console.log(`timer2: ${value}`);
+      })
+    );
+    var empty$  = rxjs.empty();
+    var of$ = rxjs.of('immediate value');
+
+    var result$  = rxjs.forkJoin(timer1$, timer2$, of$);
+
+    result$.subscribe({
+      next: (result)=> {
+        console.log(result);
+      },
+      complete: ()=>{
+        console.log('completed');
+      }
+    });
+
+  })();
+
+</script>
+
+</body>
+</html>

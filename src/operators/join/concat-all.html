@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>contactAll</title>
+
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../../../node_modules/rxjs/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+
+<script>
+
+    (function() {
+
+      // var clicks = Rx.Observable.fromEvent(document, 'click');
+      // var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(3));
+
+      // higherOrderLetters.map((x)=>{
+      //   Rx.Observable.of('a', 'b', 'c')
+      // });
+      // higherOrderLetters.contactAll();
+      // firstHigherOrderLetters.subscribe((x) =>{
+      //   console.log(x)
+      // });
+
+    })();
+
+</script>
+
+<script>
+  const operators = rxjs.operators;
+  
+  // function createInterval(interval) {
+  //   const now = new Date();
+  //   const message = `Interval Created: ${now.getMinutes()}: ${now.getSeconds()}`;
+  //   return rxjs.interval(interval).pipe(
+  //     operators.take(3),
+  //     operators.map((interval)=> {
+  //       return `${interval}-${message}`;
+  //     })
+  //   );
+  // }
+
+  function createInterval(interval) {
+    
+    const result$ = rxjs.of(true).pipe(
+      operators.switchMap(()=> {
+        const now = new Date();
+        const message = `Interval Created: ${now.getMinutes()}: ${now.getSeconds()}`;
+        return rxjs.interval(interval).pipe(
+          operators.take(3),
+          operators.map((interval)=> {
+            return `${interval}-${message}`;
+          })
+        );
+      })
+    );
+    
+    return result$;
+
+  }
+  
+  (function() {
+    // const numbers = rxjs.from([1, 2, 3]);
+    // numbers.pipe(
+    //   operators.map((num)=> {
+    //     const interval = (5 - num) * 100;
+    //     return createInterval(interval)
+    //   }),
+    //   // operators.concatAll(),
+    //   operators.zipAll()
+    // ).subscribe((value)=> {
+    //   console.log(value);
+    // })
+
+
+    const numbers = rxjs.from([1, 2, 3]);
+    numbers.pipe(
+      operators.concatMapTo((num)=> {
+        const interval = (5 - num) * 100;
+        return createInterval(interval)
+      }),
+    ).subscribe((value)=> {
+      console.log(value);
+    })
+
+  })();
+
+</script>
+
+
+</body>
+</html>

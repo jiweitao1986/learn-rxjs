@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mergeMap</title>
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../../../node_modules/rxjs/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+
+<script>
+
+    var letters = Rx.Observable.of(1, 2, 3);
+    var result = letters.mergeMap(x =>
+        Rx.Observable.of(x*10, x*100, x*1000)
+    );
+    result.subscribe(x => console.log(x));
+</script>
+
+
+</body>
+</html>

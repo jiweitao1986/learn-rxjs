@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>map</title>
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../../../node_modules/rxjs/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+
+<script>
+
+    (function() {
+        const clicks = Rx.Observable.fromEvent(document, 'click');
+        const positions = clicks.map(ev => ev.clientX);
+        positions.subscribe(x => console.log(x));
+    })();
+
+</script>
+
+</body>
+</html>

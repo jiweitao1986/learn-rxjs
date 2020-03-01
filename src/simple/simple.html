@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Simple</title>
+</head>
+<body>
+  
+  <script src="../../node_modules/rxjs/bundles/rxjs.umd.min.js"></script>
+  <script>
+    // const num$ = rxjs.of(1, 2, 3);
+    // const letter$ = rxjs.of('a', 'b', 'c');
+
+
+    // // num$.subscribe((num)=> {
+    // //   console.log(num);
+    // // });
+
+    // const highOrder$ = num$.pipe(
+    //   rxjs.operators.switchMap((num)=> {
+    //     if (num === 1) {
+    //       return rxjs.of('first');
+    //     }
+    //     return rxjs.of(num*num);
+    //   }),
+    // );
+
+    // // const result$ = highOrder$.pipe(
+    // //   rxjs.operators.mergeAll()
+    // // );
+
+    // highOrder$.subscribe((num)=> {
+    //   console.log(num);
+    // });
+    
+    // const clicks = rxjs.fromEvent(document, 'click');
+    // const result = clicks.pipe(
+    //   rxjs.operators.switchMap((ev) => rxjs.interval(1000))
+    // );
+    // result.subscribe(x => console.log(x));
+    
+  </script>
+  
+  
+  <script>
+      // const num$ = rxjs.of(1, 2, 3);
+      // const click$ = rxjs.fromEvent(document, 'click');
+      // const obs = [num$, click$];
+      // result$ = rxjs.zip(obs);
+      // result$.subscribe({
+      //   next: (result) => {
+      //     console.log('next: ' + result);
+      //   },
+      //   complete: (result) => {
+      //     console.log('complete');
+      //   }
+      // });
+      
+      
+      // const funcs ={
+      //   first: (context) => { return rxjs.of('a'); },
+      //   second: (context) => { return rxjs.of('b'); },
+      //   third: (context) => { return rxjs.of('c'); },
+      // }
+      
+      // funcs.first()
+      // const result$ = rxjs.of({});
+      // result$ = switchMap(result$, () => {
+      //   const first$ = funcs.first();
+      // });
+      
+
+
+</script>
+  
+
+
+
+<script>
+
+const clicks = rxjs.fromEvent(document, 'click');
+const delayedClicks = clicks.pipe(
+  rxjs.operators.delayWhen((event) => {
+    const random = Math.random() * 5000;
+    console.log(random);
+    return rxjs.interval(random);
+  }),
+);
+delayedClicks.subscribe(x => console.log(x))
+
+</script>
+
+
+</body>
+</html>

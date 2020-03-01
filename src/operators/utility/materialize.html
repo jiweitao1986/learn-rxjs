@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>do</title>
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../../../node_modules/rxjs/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+
+
+<script>
+
+    (function() {
+
+        var letters = Rx.Observable.of('a', 'b', 'c', 'd');
+        var upperCase = letters.map(x => x.toUpperCase());
+        var materialized = upperCase.materialize();
+        materialized.subscribe(x => console.log(x));
+
+    })();
+</script>
+
+
+</body>
+</html>
+
+

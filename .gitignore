@@ -1,0 +1,6 @@
+#/common/vendor内的内容由bower加载
+/common/vendor
+/temp
+.DS_Store
+.idea
+node_modules
