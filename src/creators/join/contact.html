@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>contact</title>
+
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../../../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../../../node_modules/rxjs/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+
+<script>
+
+    //OUTPUT:
+    // 0->1->2->a->b->c
+
+    
+    var interval1$ = rxjs.interval(2000).pipe(
+        rxjs.operators.take(2),
+        rxjs.operators.tap((value) => {
+            console.log(`interval1$: ${value}`);
+        })
+    );
+
+    var interval2$ = rxjs.interval(1000).pipe(
+        rxjs.operators.take(2),
+        rxjs.operators.tap((value) => {
+            console.log(`interval2$: ${value}`);
+        })
+    );
+    
+    var char$ = rxjs.of('a', 'b').pipe(
+        rxjs.operators.take(2),
+        rxjs.operators.tap((value) => {
+            console.log(`char$: ${value}`);
+        })
+    );
+
+    var concat$ = rxjs.concat(...[interval1$, interval2$, char$]);
+    concat$.pipe(
+        rxjs.operators.tap((value) => {
+            console.log(`concat$: ${value}`);
+        })
+    ).subscribe();
+
+    
+    // var result = timer.concat(abc, empty, def);
+    // result.subscribe(x => console.log(x));
+
+</script>
+
+
+</body>
+</html>

@@ -112,10 +112,18 @@
     // ["c", "c", "b"]
     // ["c", "c", "c"]
 
+
+
+    // 注意：
+    // 只有所有子流都有值的时候，才会发送值；
+    // 也就是说主流必须结束才行，所以用了take(3)，来结束主流；
+    // 看结果，前两个子流发送值时，合并流并没有发送值，因为第三个自流还没有值
+    // 
+
     var clicks = Rx.Observable.fromEvent(document, 'click');
     var higherOrder = clicks.map(ev => {
         return Rx.Observable.of('a', 'b', 'c');
-    }).take(3);
+    }).take(3);// 
 
     var result = higherOrder.combineAll();
 
